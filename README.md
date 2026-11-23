@@ -54,11 +54,12 @@ cd cement-kiln-fault-warning
 
 **第 2 步：安装依赖（照着清单自动下载，这一步就是"自动配环境"）**
 
-```bash
-npm install
-```
+最省事——**直接双击 `一键安装依赖.bat`**（Windows 用户），它会自动用国内镜像装好，不用敲命令。
+（Mac/Linux/Git Bash 用户执行 `bash setup.sh`；想手动敲也可以直接 `npm install`。）
 
 > 这一步会读 `package-lock.json`，把所有依赖的**精确版本**下载到 `node_modules`。`node_modules` 不用提交，`.gitignore` 已经忽略了。
+
+装完之后，**双击 `一键启动.bat`** 就能打开系统（等价于手动敲 `npm run dev`）。
 
 **第 3 步：启动**
 

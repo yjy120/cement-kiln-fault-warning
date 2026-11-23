@@ -12,6 +12,9 @@
         <router-link to="/" class="nav-item" active-class="active">
           <span class="nav-dot"></span>工况总览
         </router-link>
+        <router-link to="/screen" class="nav-item" active-class="active">
+          <span class="nav-dot"></span>预警大屏
+        </router-link>
         <div class="nav-item disabled"><span class="nav-dot"></span>异常检测</div>
         <div class="nav-item disabled"><span class="nav-dot"></span>预警列表</div>
         <div class="nav-item disabled"><span class="nav-dot"></span>处置记录</div>

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
+import WarningScreen from '../views/WarningScreen.vue'
 
 const routes = [
   {
@@ -7,6 +8,12 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     meta: { title: '工况总览' }
+  },
+  {
+    path: '/screen',
+    name: 'WarningScreen',
+    component: WarningScreen,
+    meta: { title: '预警大屏' }
   }
 ]
 
