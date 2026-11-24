@@ -8,9 +8,9 @@ echo.
 echo Step 2: commit (make a snapshot)
 git commit -m "update from team %date% %time%"
 echo.
-echo Step 3: push to GitHub
-git -c http.sslBackend=openssl push origin main
+echo Step 3: push to GitHub (dev branch)
+git -c http.sslBackend=openssl push origin dev
 echo.
 echo ==== Done ====
-echo If there is a "main to main" line above, it worked.
+echo If there is a "dev to dev" line above, it worked.
 pause
