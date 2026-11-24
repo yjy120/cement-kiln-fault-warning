@@ -48,21 +48,20 @@ import * as echarts from 'echarts'
 
 const metrics = [
   { label: '当前工况', value: '正常', unit: '', color: '#1D9E75', foot: '综合评估结果' },
-  { label: '活跃预警', value: '3', unit: '条', color: '#BA7517', foot: '待处理 2 条' },
+  { label: '活跃预警', value: '3', unit: '条', color: '#BA7517', foot: '待确认 2 条' },
   { label: '监测测点', value: '24', unit: '个', color: '#185FA5', foot: '在线 24 / 24' },
   { label: '数据更新', value: '10', unit: '秒前', color: '#5F5E5A', foot: '采集正常' }
 ]
 
 const warnings = [
-  { id: 1, time: '08:32:10', point: '窑尾温度', desc: '持续偏高，超出正常波动范围', level: '橙·严重', status: '待处理' },
-  { id: 2, time: '08:15:46', point: '篦冷机压力', desc: '短时波动异常', level: '黄·一般', status: '已确认' },
-  { id: 3, time: '07:58:23', point: '窑头负压', desc: '接近预警阈值', level: '蓝·提示', status: '已关闭' }
+  { id: 1, time: '08:32:10（演示）', point: '窑尾温度', desc: '持续偏高，超出正常波动范围', level: '严重预警', status: '待确认' },
+  { id: 2, time: '08:15:46（演示）', point: '篦冷机压力', desc: '短时波动异常', level: '一般预警', status: '已确认' },
+  { id: 3, time: '07:58:23（演示）', point: '窑头负压', desc: '接近预警阈值', level: '提示', status: '已关闭' }
 ]
 
-const levelColors = { '绿': '#1D9E75', '蓝': '#378ADD', '黄': '#BA7517', '橙': '#D85A30', '红': '#A32D2D' }
+const levelColors = { '正常': '#1D9E75', '提示': '#378ADD', '一般预警': '#BA7517', '严重预警': '#D85A30', '紧急报警': '#A32D2D' }
 const badgeStyle = (level) => {
-  const key = level.charAt(0)
-  const c = levelColors[key] || '#888780'
+  const c = levelColors[level] || '#888780'
   return { color: c, background: c + '1A', border: '1px solid ' + c + '55' }
 }
 
@@ -94,11 +93,11 @@ onMounted(() => {
       type: 'pie', radius: ['45%', '70%'],
       label: { formatter: '{b}: {c}' },
       data: [
-        { value: 18, name: '绿·正常', itemStyle: { color: '#1D9E75' } },
-        { value: 6, name: '蓝·提示', itemStyle: { color: '#378ADD' } },
-        { value: 4, name: '黄·一般', itemStyle: { color: '#BA7517' } },
-        { value: 2, name: '橙·严重', itemStyle: { color: '#D85A30' } },
-        { value: 1, name: '红·紧急', itemStyle: { color: '#A32D2D' } }
+        { value: 18, name: '正常', itemStyle: { color: '#1D9E75' } },
+        { value: 6, name: '提示', itemStyle: { color: '#378ADD' } },
+        { value: 4, name: '一般预警', itemStyle: { color: '#BA7517' } },
+        { value: 2, name: '严重预警', itemStyle: { color: '#D85A30' } },
+        { value: 1, name: '紧急报警', itemStyle: { color: '#A32D2D' } }
       ]
     }]
   })

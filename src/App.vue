@@ -15,9 +15,15 @@
         <router-link to="/screen" class="nav-item" active-class="active">
           <span class="nav-dot"></span>预警大屏
         </router-link>
-        <div class="nav-item disabled"><span class="nav-dot"></span>异常检测</div>
-        <div class="nav-item disabled"><span class="nav-dot"></span>预警列表</div>
-        <div class="nav-item disabled"><span class="nav-dot"></span>处置记录</div>
+        <router-link to="/detection" class="nav-item" active-class="active">
+          <span class="nav-dot"></span>异常检测
+        </router-link>
+        <router-link to="/warnings" class="nav-item" active-class="active">
+          <span class="nav-dot"></span>预警列表
+        </router-link>
+        <router-link to="/records" class="nav-item" active-class="active">
+          <span class="nav-dot"></span>处置记录
+        </router-link>
       </nav>
       <div class="sidebar-foot">本科毕业设计 · 原型演示</div>
     </aside>

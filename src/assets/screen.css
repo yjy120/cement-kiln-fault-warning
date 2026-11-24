@@ -15,16 +15,16 @@
   border-bottom: 1px solid rgba(58,208,255,.28);
   background: linear-gradient(180deg, rgba(18,64,104,.55), rgba(8,28,50,.2));
 }
-.sc-run { color: #8fd0ff; font-size: 13px; letter-spacing: 1px; }
+.sc-run { display: flex; align-items: center; color: #8fd0ff; font-size: 13px; letter-spacing: 1px; }
 .sc-run b { color: #43e0a0; font-weight: 500; }
 .sc-title { text-align: center; font-size: 22px; font-weight: 600; letter-spacing: 4px; color: #eaf8ff; text-shadow: 0 0 14px rgba(58,208,255,.7); }
 .sc-time { text-align: right; font-family: monospace; font-size: 14px; color: #7fd4ff; letter-spacing: 1px; }
 .sc-body { position: relative; z-index: 2; flex: 1; padding: 12px 16px 8px; min-height: 0; }
-.sc-back {
-  position: absolute; z-index: 5; left: 14px; top: 64px; font-size: 12px; color: #bfe6ff; text-decoration: none;
-  padding: 4px 12px; border: 1px solid rgba(58,208,255,.5); border-radius: 3px; background: rgba(14,52,84,.7);
+.sc-back-inline {
+  display: inline-block; margin-right: 14px; font-size: 12px; color: #bfe6ff; text-decoration: none;
+  padding: 3px 10px; border: 1px solid rgba(58,208,255,.5); border-radius: 3px; background: rgba(14,52,84,.55);
 }
-.sc-back:hover { background: rgba(58,208,255,.22); color: #fff; }
+.sc-back-inline:hover { background: rgba(58,208,255,.22); color: #fff; }
 
 .sc-nav {
   position: relative; z-index: 20; flex-shrink: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;

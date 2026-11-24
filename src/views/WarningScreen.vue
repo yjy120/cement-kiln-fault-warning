@@ -1,14 +1,15 @@
 <template>
   <div class="sc-screen">
     <header class="sc-head">
-      <div class="sc-run">运行情况：<b>生产</b></div>
+      <div class="sc-run">
+        <router-link to="/" class="sc-back-inline">‹ 返回总览</router-link>
+        <span>运行情况：<b>生产</b></span>
+      </div>
       <div class="head-title-wrap">
         <div class="sc-title">{{ current.title }}</div>
       </div>
       <div class="sc-time">{{ clock }}</div>
     </header>
-
-    <router-link to="/" class="sc-back">‹ 返回总览</router-link>
 
     <div class="sc-body">
       <component :is="current.comp" :key="active" />

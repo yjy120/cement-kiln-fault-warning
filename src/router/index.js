@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 import WarningScreen from '../views/WarningScreen.vue'
+import AnomalyDetection from '../views/AnomalyDetection.vue'
+import WarningList from '../views/WarningList.vue'
+import DisposalRecords from '../views/DisposalRecords.vue'
 
 const routes = [
   {
@@ -14,6 +17,24 @@ const routes = [
     name: 'WarningScreen',
     component: WarningScreen,
     meta: { title: '预警大屏' }
+  },
+  {
+    path: '/detection',
+    name: 'AnomalyDetection',
+    component: AnomalyDetection,
+    meta: { title: '异常检测' }
+  },
+  {
+    path: '/warnings',
+    name: 'WarningList',
+    component: WarningList,
+    meta: { title: '预警列表' }
+  },
+  {
+    path: '/records',
+    name: 'DisposalRecords',
+    component: DisposalRecords,
+    meta: { title: '处置记录' }
   }
 ]
 
