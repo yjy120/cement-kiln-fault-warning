@@ -1,6 +1,6 @@
 水泥窑线故障预警系统 —— 队友上手说明（学 git 命令版）
 
-我们的规矩：日常干活都在 dev 分支，main 是稳定版，只有佳莹能合并到 main。
+我们的规矩：日常干活都在 dev 分支，main 是稳定版，只有 owner 能合并到 main。
 你不用记脚本了，直接学几条 git 命令，以后到哪都能用。
 
 【一、第一次准备，只做一次】
@@ -8,7 +8,7 @@
 2. 装 Git：打开 git-scm.com，下载安装，一路下一步。
 3. 找个文件夹放项目，比如 D 盘建个 cement 文件夹，
    在里面空白处按住 Shift + 鼠标右键 → "在此处打开 PowerShell / 终端"。
-4. 输入这条，把项目拉下来（会要 GitHub 用户名 + 密码/令牌，令牌找佳莹要）：
+4. 输入这条，把项目拉下来（仓库是公开的，这步不会要账号密码）：
    git clone https://github.com/yjy120/cement-kiln-fault-warning.git
 5. 进入下载出来的文件夹：
    cd cement-kiln-fault-warning
@@ -16,6 +16,16 @@
    git checkout dev
 7. 双击「一键安装依赖.bat」，黑窗口跑完（出现 Done）就好。
 8. 双击「一键启动.bat」，浏览器自动打开页面 → 项目跑起来了。
+
+【补充：push 时才会用到的"令牌"】
+- 令牌 = GitHub 个人访问密钥（Personal Access Token，PAT），不是登录密码。
+- 拉代码（clone / pull）不用令牌；只有上传（git push）时才会问：
+  用户名填 GitHub 用户名，密码那一栏粘贴令牌。
+- 每个人自己生成：GitHub 右上角头像 → Settings → Developer settings
+  → Personal access tokens → Tokens (classic) → Generate new token，
+  Note 写 cement，Expiration 选 90 天，权限勾 repo，生成后复制存好（只显示一次）。
+- owner 得先把你的 GitHub 用户名加成协作者，不然有令牌也推不上去。
+- 令牌别发群里，谁的就谁自己用。
 
 【二、以后每次干活就三步】
 
@@ -42,10 +52,10 @@
    —— 看到 "dev -> dev" 就成了。千万别写 main！
 
 【三、必须记住的规矩】
-1. 只往 dev 推：git push origin dev  —— 千万别写 main！main 是稳定版，只有佳莹能合。
+1. 只往 dev 推：git push origin dev  —— 千万别写 main！main 是稳定版，只有 owner 能合。
 2. 动手前先 pull，改完立刻 add → commit → push，别攒着。
 3. 各改各的文件，别俩人同时改一个，不然会"冲突"（报错截图发群）。
-4. 推之前确认 GitHub 能打开（代理/VPN 开着），不开推不上去。
+4. 推之前先确认 GitHub 网页能打开；如果连不上或报 SSL 错，再开代理/VPN 重试。
 
 【四、常用命令小抄（贴桌边）】
 git status              看现在改了哪些文件
@@ -58,10 +68,10 @@ git log --oneline       看提交记录
 
 【五、报错怎么办】
 - 提示没权限（403 / permission denied）：你还没被加成协作者，
-  把 GitHub 用户名发群里，佳莹加你之后就能推了。
+  把 GitHub 用户名发群里，owner 加你之后就能推了。
 - 提示 SSL / SSL_read / connection reset：在终端先敲这一条（只需一次）：
   git config --global http.sslBackend openssl
   然后再重新 push。
-- 任何看不懂的红色报错：黑窗口截图发群，我帮你看。
+- 任何看不懂的红色报错：黑窗口截图发群，owner 帮你看。
 
 有问题群里直接问，看到就回。
