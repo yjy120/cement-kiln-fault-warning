@@ -1,11 +1,18 @@
-水泥窑线故障预警系统 —— 队友上手说明（学 git 命令版）
+水泥窑线故障预警系统 —— 队友上手说明
 
 我们的规矩：日常干活都在 dev 分支，main 是稳定版，只有 owner 能合并到 main。
-你不用记脚本了，直接学几条 git 命令，以后到哪都能用。
 
 【一、第一次准备，只做一次】
-1. 装 Node.js：浏览器打开 nodejs.org，下载 LTS 版，一路"下一步"装完。
-2. 装 Git：打开 git-scm.com，下载安装，一路下一步。
+（下面版本是 2026-11-24 查的；以后以官网标注为准，认准 LTS 就行）
+
+1. 装 Node.js：浏览器打开 https://nodejs.org/ ，下载 LTS 版，一路"下一步"装完。
+   当前 LTS：v26.13.1（自带 npm 11.20.0），别下成 Current / Alpha。
+   Windows 64 位直链：https://nodejs.org/dist/v26.13.1/node-v26.13.1-x64.msi
+
+2. 装 Git：打开 https://git-scm.com/install/windows ，下载安装，一路下一步。
+   当前最新版：2.56.1
+   Windows 64 位直链：https://github.com/git-for-windows/git/releases/download/v2.56.1.windows.1/Git-2.56.1-64-bit.exe
+
 3. 找个文件夹放项目，比如 D 盘建个 cement 文件夹，
    在里面空白处按住 Shift + 鼠标右键 → "在此处打开 PowerShell / 终端"。
 4. 输入这条，把项目拉下来（仓库是公开的，这步不会要账号密码）：
@@ -57,7 +64,7 @@
 3. 各改各的文件，别俩人同时改一个，不然会"冲突"（报错截图发群）。
 4. 推之前先确认 GitHub 网页能打开；如果连不上或报 SSL 错，再开代理/VPN 重试。
 
-【四、常用命令小抄（贴桌边）】
+【四、常用命令】
 git status              看现在改了哪些文件
 git pull origin dev     拉最新代码
 git add .               暂存所有改动
