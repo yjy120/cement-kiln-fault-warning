@@ -1,0 +1,91 @@
+/* 老师风格 · 水泥煅烧监测诊断系统 公共样式 */
+.sc-screen {
+  position: relative; height: 100vh; min-height: 100vh; overflow: hidden; color: #cfe6ff;
+  background: radial-gradient(ellipse at 50% 0%, #123a5e 0%, #0a2340 45%, #05121f 100%);
+  display: flex; flex-direction: column; font-size: 12px;
+}
+.sc-screen::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .3;
+  background-image: linear-gradient(rgba(58,208,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(58,208,255,.06) 1px, transparent 1px);
+  background-size: 44px 44px; mask-image: linear-gradient(#000, transparent 90%);
+}
+.sc-head {
+  position: relative; z-index: 2; height: 58px; flex-shrink: 0;
+  display: grid; grid-template-columns: 1fr 2fr 1fr; align-items: center; padding: 0 22px;
+  border-bottom: 1px solid rgba(58,208,255,.28);
+  background: linear-gradient(180deg, rgba(18,64,104,.55), rgba(8,28,50,.2));
+}
+.sc-run { color: #8fd0ff; font-size: 13px; letter-spacing: 1px; }
+.sc-run b { color: #43e0a0; font-weight: 500; }
+.sc-title { text-align: center; font-size: 22px; font-weight: 600; letter-spacing: 4px; color: #eaf8ff; text-shadow: 0 0 14px rgba(58,208,255,.7); }
+.sc-time { text-align: right; font-family: monospace; font-size: 14px; color: #7fd4ff; letter-spacing: 1px; }
+.sc-body { position: relative; z-index: 2; flex: 1; padding: 12px 16px 8px; min-height: 0; }
+.sc-back {
+  position: absolute; z-index: 5; left: 14px; top: 64px; font-size: 12px; color: #bfe6ff; text-decoration: none;
+  padding: 4px 12px; border: 1px solid rgba(58,208,255,.5); border-radius: 3px; background: rgba(14,52,84,.7);
+}
+.sc-back:hover { background: rgba(58,208,255,.22); color: #fff; }
+
+.sc-nav {
+  position: relative; z-index: 20; flex-shrink: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+  padding: 8px 16px 12px; border-top: 1px solid rgba(58,208,255,.25);
+  background: linear-gradient(0deg, rgba(10,40,70,.9), rgba(10,40,70,.4));
+}
+.sc-tab {
+  cursor: pointer; text-align: center; padding: 12px 6px; font-size: 14px; letter-spacing: 1px; color: #bcd9f2;
+  font-family: inherit; position: relative; user-select: none;
+  background: linear-gradient(180deg, rgba(24,74,116,.75), rgba(10,38,64,.75));
+  border: 1px solid #3a8fc4;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  transition: all .18s;
+}
+.sc-tab .tab-no { display: block; font-size: 9px; letter-spacing: 2px; color: #6aa8d6; margin-bottom: 3px; }
+.sc-tab:hover { color: #fff; background: linear-gradient(180deg, rgba(40,110,165,.95), rgba(18,60,96,.95)); border-color: #6fd6ff; }
+.sc-tab:hover .tab-no { color: #aef0ff; }
+.sc-tab.on {
+  color: #04121f; font-weight: 600;
+  background: linear-gradient(180deg, #7ce4ff, #35b8e8);
+  border-color: #aef0ff; box-shadow: 0 0 16px rgba(58,208,255,.5);
+}
+.sc-tab.on .tab-no { color: #0a3a58; }
+
+/* 面板：切角 + 渐变标题栏 */
+.sc-grid { display: grid; gap: 10px; height: 100%; }
+.sc-panel {
+  position: relative; min-height: 0; display: flex; flex-direction: column;
+  background: linear-gradient(160deg, rgba(13,44,74,.85), rgba(7,26,46,.85));
+  border: 1px solid #2a6f9e; padding: 0; overflow: hidden;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  box-shadow: inset 0 0 24px rgba(20,80,130,.25);
+}
+.sc-panel::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 14px; height: 2px; background: #5fd0ff;
+}
+.sc-pt {
+  flex-shrink: 0; height: 28px; display: flex; align-items: center; gap: 7px; padding: 0 12px;
+  font-size: 13px; color: #dff1ff; letter-spacing: .5px;
+  background: linear-gradient(90deg, #164a75, #1a5c8e 50%, #12406a);
+  border-bottom: 1px solid #2f86b8;
+}
+.sc-pt::before { content: ''; width: 3px; height: 13px; background: #7ce4ff; box-shadow: 0 0 8px #7ce4ff; }
+.sc-pt .en { margin-left: auto; font-size: 9px; color: #6a9cc4; letter-spacing: 1px; }
+.sc-chart { flex: 1; width: 100%; min-height: 0; }
+.sc-pad { padding: 8px 10px; flex: 1; min-height: 0; }
+
+/* 表格 */
+.sc-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.sc-table th { color: #7fd4ff; font-weight: 500; text-align: left; padding: 6px 8px; background: rgba(22,74,117,.5); border-bottom: 1px solid #2f7fb8; }
+.sc-table td { padding: 6px 8px; border-bottom: 1px solid rgba(47,127,184,.18); color: #bcd8f0; white-space: nowrap; }
+.sc-table tr:hover td { background: rgba(58,208,255,.07); }
+.sc-scroll { overflow: auto; height: 100%; }
+.sc-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.sc-scroll::-webkit-scrollbar-thumb { background: #2f7fb8; border-radius: 3px; }
+
+/* 等级色 */
+.lv-normal { color: #43e0a0; } .lv-tip { color: #3ad0ff; } .lv-general { color: #ffb648; }
+.lv-serious { color: #ff8a4c; } .lv-critical { color: #ff5b5b; }
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; box-shadow: 0 0 6px currentColor; background: currentColor; }
+.flash { animation: scBlink 1.4s infinite; }
+@keyframes scBlink { 50% { opacity: .35; } }
+
+@media (max-width: 1100px) { .sc-title { font-size: 16px; } .sc-tab { font-size: 12px; } }

@@ -1,6 +1,6 @@
 <template>
-  <div class="app-shell">
-    <aside class="sidebar">
+  <div class="app-shell" :class="{ 'screen-mode': isScreen }">
+    <aside class="sidebar" v-if="!isScreen">
       <div class="brand">
         <span class="brand-mark">窑</span>
         <div>
@@ -22,11 +22,11 @@
       <div class="sidebar-foot">本科毕业设计 · 原型演示</div>
     </aside>
     <main class="main">
-      <header class="topbar">
+      <header class="topbar" v-if="!isScreen">
         <span class="topbar-title">{{ $route.meta.title || '工况总览' }}</span>
         <span class="topbar-tag"><span class="live-dot"></span>演示数据</span>
       </header>
-      <section class="content">
+      <section class="content" :class="{ 'content-screen': isScreen }">
         <router-view />
       </section>
     </main>
@@ -34,4 +34,13 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+const isScreen = computed(() => route.path === '/screen')
 </script>
+
+<style scoped>
+.app-shell.screen-mode { min-height: 100vh; }
+.content-screen { padding: 0 !important; }
+</style>
