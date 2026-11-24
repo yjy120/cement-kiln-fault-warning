@@ -1,0 +1,60 @@
+水泥窑线故障预警系统 —— 队友上手说明（学 git 命令版）
+
+我们的规矩：日常干活都在 dev 分支，main 是稳定版，只有佳莹能合并到 main。
+你不用记脚本了，直接学几条 git 命令，以后到哪都能用。
+
+【一、第一次准备，只做一次】
+1. 装 Node.js：浏览器打开 nodejs.org，下载 LTS 版，一路"下一步"装完。
+2. 装 Git：打开 git-scm.com，下载安装，一路下一步。
+3. 找个文件夹放项目，比如 D 盘建个 cement 文件夹，
+   在里面空白处按住 Shift + 鼠标右键 → "在此处打开 PowerShell / 终端"。
+4. 输入这条，把项目拉下来（会要 GitHub 用户名 + 密码/令牌，令牌找佳莹要）：
+   git clone https://github.com/yjy120/cement-kiln-fault-warning.git
+5. 进入下载出来的文件夹：
+   cd cement-kiln-fault-warning
+6. 切到 dev 分支（我们日常干活的分支）：
+   git checkout dev
+7. 双击「一键安装依赖.bat」，黑窗口跑完（出现 Done）就好。
+8. 双击「一键启动.bat」，浏览器自动打开页面 → 项目跑起来了。
+
+【二、以后每次干活，记住这 4 条命令】
+按顺序敲，每条敲完按回车：
+
+第 1 条：git pull origin dev
+   —— 先把别人改的代码拉下来。每次动手前必做！
+
+   （然后去改代码：用 VS Code 打开文件夹，只改分给你的文件）
+
+第 2 条：git add .
+   —— 把你改的文件"暂存"起来（别忘了那个点 .）
+
+第 3 条：git commit -m "这次改了啥"
+   —— 给这次改动记个说明，引号里写你干了啥，比如 "改了首页图表"
+
+第 4 条：git push origin dev
+   —— 上传到 GitHub 的 dev 分支。看到 "dev to dev" 就成了。
+
+【三、必须记住的规矩】
+1. 只往 dev 推：git push origin dev  —— 千万别写 main！main 是稳定版，只有佳莹能合。
+2. 动手前先 pull，改完立刻 add → commit → push，别攒着。
+3. 各改各的文件，别俩人同时改一个，不然会"冲突"（报错截图发群）。
+4. 推之前确认 GitHub 能打开（代理/VPN 开着），不开推不上去。
+
+【四、常用命令小抄（贴桌边）】
+git status              看现在改了哪些文件
+git pull origin dev     拉最新代码
+git add .               暂存所有改动
+git commit -m "说明"    提交改动
+git push origin dev     推到 dev 分支
+git checkout dev        切换到 dev 分支
+git log --oneline       看提交记录
+
+【五、报错怎么办】
+- 提示没权限（403 / permission denied）：你还没被加成协作者，
+  把 GitHub 用户名发群里，佳莹加你之后就能推了。
+- 提示 SSL / SSL_read / connection reset：在终端先敲这一条（只需一次）：
+  git config --global http.sslBackend openssl
+  然后再重新 push。
+- 任何看不懂的红色报错：黑窗口截图发群，我帮你看。
+
+有问题群里直接问，看到就回。
