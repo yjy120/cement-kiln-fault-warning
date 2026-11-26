@@ -5,16 +5,16 @@
       下列为演示样例，非真实预警事件；等级名称与颜色为设计草案，需老师与现场确认。
     </div>
 
-    <div class="cards">
-      <div class="card"><div class="card-label">演示预警条目</div><div class="card-value" style="color:#185FA5">{{ rows.length }}</div><div class="card-foot">本页本地列表</div></div>
-      <div class="card"><div class="card-label">待确认</div><div class="card-value" style="color:#BA7517">{{ countBy('待确认') }}</div><div class="card-foot">手册状态：待确认</div></div>
-      <div class="card"><div class="card-label">处理中</div><div class="card-value" style="color:#378ADD">{{ countBy('处理中') }}</div><div class="card-foot">手册状态：处理中</div></div>
-      <div class="card"><div class="card-label">已关闭</div><div class="card-value" style="color:#1D9E75">{{ countBy('已关闭') }}</div><div class="card-foot">手册状态：已关闭</div></div>
+    <div class="stat-line">
+      <div class="stat"><span class="stat-label">演示预警条目</span><span class="stat-num">{{ rows.length }}</span></div>
+      <div class="stat"><span class="stat-label">待确认</span><span class="stat-num warn">{{ countBy('待确认') }}</span></div>
+      <div class="stat"><span class="stat-label">处理中</span><span class="stat-num info">{{ countBy('处理中') }}</span></div>
+      <div class="stat"><span class="stat-label">已关闭</span><span class="stat-num ok">{{ countBy('已关闭') }}</span></div>
     </div>
 
     <div class="panel">
       <div class="toolbar">
-        <div class="panel-title" style="margin:0">预警列表</div>
+        <div class="panel-title">预警列表</div>
         <div class="filters">
           <input v-model="keyword" class="input" placeholder="搜索编号 / 工艺段" />
           <select v-model="levelFilter" class="input"><option value="">全部等级</option><option v-for="l in levels" :key="l">{{ l }}</option></select>
@@ -64,10 +64,10 @@ import { ref, computed } from 'vue'
 
 const levels = ['正常', '提示', '一般预警', '严重预警', '紧急报警']
 const statuses = ['待确认', '已确认', '处理中', '已关闭']
-const levelColor = { '正常': '#1D9E75', '提示': '#378ADD', '一般预警': '#BA7517', '严重预警': '#D85A30', '紧急报警': '#A32D2D' }
+const levelColor = { '正常': '#43e0a0', '提示': '#7fd4ff', '一般预警': '#ffc94d', '严重预警': '#ff8a4d', '紧急报警': '#ff5c5c' }
 const badgeStyle = (level) => {
-  const c = levelColor[level] || '#888780'
-  return { color: c, background: c + '1A', border: '1px solid ' + c + '55' }
+  const c = levelColor[level] || '#6B746C'
+  return { color: c, background: c + '12' }
 }
 
 const rows = ref([
@@ -91,22 +91,32 @@ const openDetail = (r) => { detail.value = { ...r } }
 </script>
 
 <style scoped>
-.page { display: flex; flex-direction: column; gap: 16px; }
-.demo-note { background:#FFF7E6; border:1px solid #FFE7A8; color:#8A5A00; padding:10px 14px; border-radius:8px; font-size:12px; }
-.toolbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
-.filters { display:flex; gap:8px; flex-wrap:wrap; }
-.input { border:1px solid #E8ECEF; border-radius:6px; padding:7px 10px; font-size:13px; background:#fff; min-width:140px; }
-.btn { border:1px solid #185FA5; color:#185FA5; background:#fff; border-radius:6px; padding:5px 12px; cursor:pointer; font-size:12px; }
-.btn.primary { background:#185FA5; color:#fff; }
-.empty { text-align:center; color:#888780; padding:18px; font-size:13px; }
-.detail-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
-.detail-grid > div { background:#FAFBFC; border-radius:6px; padding:10px 12px; }
-.k { display:block; font-size:12px; color:#5F5E5A; margin-bottom:4px; }
-.v { font-size:13px; color:#2C2C2A; }
-.detail-foot { margin-top:10px; font-size:11px; color:#888780; }
-.modal-mask { position:fixed; inset:0; background:rgba(0,0,0,.35); display:flex; align-items:center; justify-content:center; z-index:99; }
-.modal { width:min(640px,92vw); background:#fff; border-radius:12px; padding:20px; box-shadow:0 12px 40px rgba(0,0,0,.2); }
-.modal-head { font-size:16px; font-weight:500; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; }
-.close { cursor:pointer; font-size:22px; color:#888780; line-height:1; }
-.modal-foot { margin-top:16px; text-align:right; }
+.stat-line {
+  display: flex; gap: 0;
+  background: linear-gradient(160deg, var(--panel-a), var(--panel-b));
+  border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  box-shadow: inset 0 0 24px rgba(20, 80, 130, .25);
+}
+.stat { flex: 1; display: flex; align-items: baseline; gap: 12px; padding: 11px 18px; border-right: 1px solid var(--line-soft); }
+.stat:last-child { border-right: none; }
+.stat-label { font-size: 12px; color: #7fb3d8; letter-spacing: 1px; }
+.stat-num { font-family: var(--num); font-size: 22px; letter-spacing: 1px; }
+.stat-num.warn { color: var(--warn); }
+.stat-num.info { color: var(--info); }
+.stat-num.ok { color: var(--ok); }
+.detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.detail-grid > div { background: rgba(58, 208, 255, .05); border: 1px solid var(--line-soft); padding: 9px 12px; }
+.k { display: block; font-size: 11px; color: #7fb3d8; margin-bottom: 3px; }
+.v { font-size: 13px; color: var(--text); }
+.modal-mask { position: fixed; inset: 0; background: rgba(3, 12, 22, .65); display: flex; align-items: center; justify-content: center; z-index: 99; }
+.modal { width: min(640px, 92vw); background: linear-gradient(160deg, #0e3252, #081e36); border: 1px solid var(--line); padding: 22px; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); box-shadow: 0 0 40px rgba(58, 208, 255, .2); }
+.modal-head { font-size: 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; color: var(--title); letter-spacing: 1px; }
+.close { cursor: pointer; font-size: 24px; color: #557a99; line-height: 1; }
+.close:hover { color: #fff; }
+.modal-foot { margin-top: 18px; text-align: right; }
+@media (max-width: 760px) {
+  .stat-line { flex-wrap: wrap; }
+  .stat { min-width: 50%; }
+}
 </style>

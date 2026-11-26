@@ -7,7 +7,7 @@
 
     <div class="panels">
       <div class="panel">
-        <div class="panel-title">处置记录</div>
+        <div class="panel-title">处置记录<span class="sub">本地演示 · 未接入数据库</span></div>
         <table class="warn-table">
           <thead>
             <tr><th>预警编号</th><th>关联预警</th><th>确认人</th><th>处理状态</th><th>处理时间</th><th>处置备注</th></tr>
@@ -26,7 +26,7 @@
       </div>
 
       <div class="panel">
-        <div class="panel-title">处置登记（本地演示）</div>
+        <div class="panel-title">处置登记<span class="sub">本地演示</span></div>
         <div class="form">
           <label>预警编号
             <input v-model="form.id" class="input" placeholder="如 DEMO-W001" />
@@ -65,10 +65,10 @@
 import { ref, reactive } from 'vue'
 
 const statuses = ['待确认', '已确认', '处理中', '已关闭']
-const statusColor = { '待确认': '#BA7517', '已确认': '#378ADD', '处理中': '#D85A30', '已关闭': '#1D9E75' }
+const statusColor = { '待确认': '#ffc94d', '已确认': '#7fd4ff', '处理中': '#ff8a4d', '已关闭': '#43e0a0' }
 const statusStyle = (s) => {
-  const c = statusColor[s] || '#888780'
-  return { color: c, background: c + '1A', border: '1px solid ' + c + '55' }
+  const c = statusColor[s] || '#6B746C'
+  return { color: c, background: c + '12' }
 }
 const warnings = ['DEMO-W001 · 窑尾烟室', 'DEMO-W002 · 篦冷机', 'DEMO-W003 · 分解炉', 'DEMO-W004 · 窑头']
 
@@ -93,17 +93,13 @@ const reset = () => Object.assign(form, emptyForm())
 </script>
 
 <style scoped>
-.page { display:flex; flex-direction:column; gap:16px; }
-.demo-note { background:#FFF7E6; border:1px solid #FFE7A8; color:#8A5A00; padding:10px 14px; border-radius:8px; font-size:12px; }
-.panels { display:grid; grid-template-columns:3fr 2fr; gap:16px; }
-.form { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.form label { display:flex; flex-direction:column; gap:6px; font-size:12px; color:#5F5E5A; }
-.form label.full { grid-column:1 / -1; }
-.input { width:100%; border:1px solid #E8ECEF; border-radius:6px; padding:8px 10px; font-size:13px; background:#fff; }
-.textarea { resize:vertical; }
-.actions { display:flex; gap:8px; margin-top:14px; }
-.btn { border:1px solid #185FA5; color:#185FA5; background:#fff; border-radius:6px; padding:7px 14px; cursor:pointer; font-size:12px; }
-.btn.primary { background:#185FA5; color:#fff; }
-.hint { margin-top:12px; font-size:11px; color:#888780; }
-@media (max-width:1100px){ .panels{grid-template-columns:1fr;} }
+.sub { font-size: 11px; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.form { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.form label { display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #7fb3d8; }
+.form label.full { grid-column: 1 / -1; }
+.form .input { width: 100%; min-width: 0; }
+.textarea { resize: vertical; font-family: inherit; }
+.actions { display: flex; gap: 8px; margin-top: 16px; }
+@media (max-width: 1200px) { .panels { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .form { grid-template-columns: 1fr; } }
 </style>
