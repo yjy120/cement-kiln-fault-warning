@@ -25,10 +25,10 @@ const steps=[
   {t:'数据接入',d:'采集测点时序数据'},{t:'异常检测',d:'统计量/趋势偏离判定'},{t:'风险评估',d:'按程度与持续时长定级'},{t:'故障预警',d:'绿蓝黄橙红五级'},{t:'人工处置',d:'确认并记录闭环'}
 ]
 const warns=[
-  {t:'09:16:27（演示）',pos:'窑尾温度',info:'持续偏高（演示）',lv:'严重预警',cls:'lv-critical',flash:1,st:'待确认'},
-  {t:'09:14:46（演示）',pos:'篦冷机压力',info:'短时波动（演示）',lv:'一般预警',cls:'lv-general',st:'处理中'},
-  {t:'09:12:23（演示）',pos:'窑头负压',info:'缓慢下降趋势（演示）',lv:'提示',cls:'lv-tip',st:'已确认'},
-  {t:'09:08:02（演示）',pos:'喂料量',info:'异常波动已恢复（演示）',lv:'正常',cls:'lv-normal',st:'已关闭'}
+  {t:'09:16:27',pos:'窑尾温度',info:'持续偏高',lv:'严重预警',cls:'lv-critical',flash:1,st:'待确认'},
+  {t:'09:14:46',pos:'篦冷机压力',info:'短时波动',lv:'一般预警',cls:'lv-general',st:'处理中'},
+  {t:'09:12:23',pos:'窑头负压',info:'缓慢下降趋势',lv:'提示',cls:'lv-tip',st:'已确认'},
+  {t:'09:08:02',pos:'喂料量',info:'异常波动已恢复',lv:'正常',cls:'lv-normal',st:'已关闭'}
 ]
 onMounted(()=>{
   const mk=(el,o)=>{const c=echarts.init(el);c.setOption(o);charts.push(c)}

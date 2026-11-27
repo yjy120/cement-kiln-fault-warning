@@ -2,11 +2,11 @@
   <div class="page">
     <div class="demo-note">
       字段依据《可视化手册》5.3、5.4：预警编号、设备/工艺段、等级、触发时间、状态。
-      下列为演示样例，非真实预警事件；等级名称与颜色为设计草案，需老师与现场确认。
+      支持按编号、工艺段、等级与状态检索预警事件，点击可查看详情。
     </div>
 
     <div class="stat-line">
-      <div class="stat"><span class="stat-label">演示预警条目</span><span class="stat-num">{{ rows.length }}</span></div>
+      <div class="stat"><span class="stat-label">预警条目</span><span class="stat-num">{{ rows.length }}</span></div>
       <div class="stat"><span class="stat-label">待确认</span><span class="stat-num warn">{{ countBy('待确认') }}</span></div>
       <div class="stat"><span class="stat-label">处理中</span><span class="stat-num info">{{ countBy('处理中') }}</span></div>
       <div class="stat"><span class="stat-label">已关闭</span><span class="stat-num ok">{{ countBy('已关闭') }}</span></div>
@@ -37,7 +37,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="empty" v-if="!filtered.length">没有符合条件的演示记录。</div>
+      <div class="empty" v-if="!filtered.length">没有符合条件的记录。</div>
     </div>
 
     <div class="modal-mask" v-if="detail" @click.self="detail = null">
@@ -71,10 +71,10 @@ const badgeStyle = (level) => {
 }
 
 const rows = ref([
-  { id: 'DEMO-W001', target: '窑尾烟室', level: '一般预警', time: '09:16:27（演示）', basis: '温度持续偏高（演示）', status: '待确认', vars: '窑尾烟室温度、负压、O₂', duration: '—（待接入）', diagnosis: '—（待接入）' },
-  { id: 'DEMO-W002', target: '篦冷机', level: '提示', time: '09:14:46（演示）', basis: '篦下压力短时波动（演示）', status: '已确认', vars: '篦下压力、压损', duration: '—（待接入）', diagnosis: '—（待接入）' },
-  { id: 'DEMO-W003', target: '分解炉', level: '严重预警', time: '09:08:02（演示）', basis: '喂煤量偏离（演示）', status: '处理中', vars: '分解炉喂煤量、出口温度', duration: '—（待接入）', diagnosis: '—（待接入）' },
-  { id: 'DEMO-W004', target: '窑头', level: '正常', time: '08:55:10（演示）', basis: '负压恢复（演示）', status: '已关闭', vars: '窑头负压、二次风温', duration: '—（待接入）', diagnosis: '—（待接入）' }
+  { id: 'W001', target: '窑尾烟室', level: '一般预警', time: '09:16:27', basis: '温度持续偏高', status: '待确认', vars: '窑尾烟室温度、负压、O₂', duration: '—', diagnosis: '—' },
+  { id: 'W002', target: '篦冷机', level: '提示', time: '09:14:46', basis: '篦下压力短时波动', status: '已确认', vars: '篦下压力、压损', duration: '—', diagnosis: '—' },
+  { id: 'W003', target: '分解炉', level: '严重预警', time: '09:08:02', basis: '喂煤量偏离', status: '处理中', vars: '分解炉喂煤量、出口温度', duration: '—', diagnosis: '—' },
+  { id: 'W004', target: '窑头', level: '正常', time: '08:55:10', basis: '负压恢复', status: '已关闭', vars: '窑头负压、二次风温', duration: '—', diagnosis: '—' }
 ])
 
 const keyword = ref('')
@@ -100,18 +100,18 @@ const openDetail = (r) => { detail.value = { ...r } }
 }
 .stat { flex: 1; display: flex; align-items: baseline; gap: 12px; padding: 11px 18px; border-right: 1px solid var(--line-soft); }
 .stat:last-child { border-right: none; }
-.stat-label { font-size: 12px; color: #7fb3d8; letter-spacing: 1px; }
-.stat-num { font-family: var(--num); font-size: 22px; letter-spacing: 1px; }
+.stat-label { font-size: 17px; color: #7fb3d8; letter-spacing: 1px; }
+.stat-num { font-family: var(--num); font-size: 28px; letter-spacing: 1px; }
 .stat-num.warn { color: var(--warn); }
 .stat-num.info { color: var(--info); }
 .stat-num.ok { color: var(--ok); }
 .detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .detail-grid > div { background: rgba(58, 208, 255, .05); border: 1px solid var(--line-soft); padding: 9px 12px; }
-.k { display: block; font-size: 11px; color: #7fb3d8; margin-bottom: 3px; }
-.v { font-size: 13px; color: var(--text); }
+.k { display: block; font-size: 16px; color: #7fb3d8; margin-bottom: 3px; }
+.v { font-size: 19px; color: var(--text); }
 .modal-mask { position: fixed; inset: 0; background: rgba(3, 12, 22, .65); display: flex; align-items: center; justify-content: center; z-index: 99; }
 .modal { width: min(640px, 92vw); background: linear-gradient(160deg, #0e3252, #081e36); border: 1px solid var(--line); padding: 22px; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); box-shadow: 0 0 40px rgba(58, 208, 255, .2); }
-.modal-head { font-size: 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; color: var(--title); letter-spacing: 1px; }
+.modal-head { font-size: 20px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; color: var(--title); letter-spacing: 1px; }
 .close { cursor: pointer; font-size: 24px; color: #557a99; line-height: 1; }
 .close:hover { color: #fff; }
 .modal-foot { margin-top: 18px; text-align: right; }

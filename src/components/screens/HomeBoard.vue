@@ -16,7 +16,7 @@
             <linearGradient id="hPipe" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1d4e6b"/><stop offset=".5" stop-color="#3aa0d0"/><stop offset="1" stop-color="#1d4e6b"/></linearGradient>
             <radialGradient id="hKiln"><stop offset="0" stop-color="#ffb14a"/><stop offset="1" stop-color="#b0451f"/></radialGradient>
           </defs>
-          <text x="310" y="20" text-anchor="middle" class="f-title">五代旋风预热器 · 在线测点演示</text>
+          <text x="310" y="20" text-anchor="middle" class="f-title">五代旋风预热器 · 在线测点</text>
           <g transform="translate(150,40)">
             <rect x="0" y="0" width="120" height="150" fill="none" stroke="#3a86b8" stroke-width="1.5"/>
             <g v-for="(c,i) in 5" :key="i">

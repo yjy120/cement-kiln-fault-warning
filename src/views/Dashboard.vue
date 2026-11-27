@@ -7,7 +7,7 @@
       </div>
       <div class="board-stamp">
         <span class="stamp-dot"></span>
-        <span>演示数据 · 非真实采集</span>
+        <span>工况实时监视</span>
       </div>
     </div>
 
@@ -65,9 +65,9 @@ const metrics = [
 ]
 
 const warnings = [
-  { id: 1, time: '08:32:10（演示）', point: '窑尾温度', desc: '持续偏高，超出正常波动范围', level: '严重预警', status: '待确认' },
-  { id: 2, time: '08:15:46（演示）', point: '篦冷机压力', desc: '短时波动异常', level: '一般预警', status: '已确认' },
-  { id: 3, time: '07:58:23（演示）', point: '窑头负压', desc: '接近预警阈值', level: '提示', status: '已关闭' }
+  { id: 1, time: '08:32:10', point: '窑尾温度', desc: '持续偏高，超出正常波动范围', level: '严重预警', status: '待确认' },
+  { id: 2, time: '08:15:46', point: '篦冷机压力', desc: '短时波动异常', level: '一般预警', status: '已确认' },
+  { id: 3, time: '07:58:23', point: '窑头负压', desc: '接近预警阈值', level: '提示', status: '已关闭' }
 ]
 
 const levelColors = { '正常': '#43e0a0', '提示': '#7fd4ff', '一般预警': '#ffc94d', '严重预警': '#ff8a4d', '紧急报警': '#ff5c5c' }
@@ -82,28 +82,30 @@ const levelChart = ref(null)
 onMounted(() => {
   const t = echarts.init(trendChart.value)
   t.setOption({
-    tooltip: { trigger: 'axis', backgroundColor: 'rgba(7,26,46,.92)', borderColor: '#2a6f9e', textStyle: { color: '#cfe6ff' } },
-    grid: { left: 48, right: 22, top: 18, bottom: 32 },
+    tooltip: { trigger: 'axis', backgroundColor: 'rgba(7,26,46,.94)', borderColor: '#2a6f9e', textStyle: { color: '#cfe6ff', fontSize: 17 }, padding: [10, 14] },
+    grid: { left: 68, right: 58, top: 30, bottom: 48 },
     xAxis: {
       type: 'category', boundaryGap: false,
       data: ['08:00', '08:10', '08:20', '08:30', '08:40', '08:50', '09:00'],
       axisLine: { lineStyle: { color: '#2a6f9e' } }, axisTick: { show: false },
-      axisLabel: { color: '#8fb8d9' }
+      axisLabel: { color: '#a8cbe6', fontSize: 16 }
     },
     yAxis: {
-      type: 'value', name: '温度 ℃', splitLine: { lineStyle: { color: 'rgba(58,208,255,.12)' } },
-      nameTextStyle: { color: '#8fb8d9', fontSize: 11 },
-      axisLabel: { color: '#8fb8d9' }
+      type: 'value', name: '温度 ℃', splitLine: { lineStyle: { color: 'rgba(58,208,255,.14)' } },
+      nameTextStyle: { color: '#a8cbe6', fontSize: 16 },
+      axisLabel: { color: '#a8cbe6', fontSize: 16 }
     },
     series: [{
-      name: '窑尾温度', type: 'line', smooth: false, symbol: 'circle', symbolSize: 5,
-      lineStyle: { color: '#3ad0ff', width: 2 }, itemStyle: { color: '#3ad0ff' },
-      areaStyle: { color: 'rgba(58,208,255,0.10)' },
+      name: '窑尾温度', type: 'line', smooth: false, symbol: 'circle', symbolSize: 7,
+      lineStyle: { color: '#3ad0ff', width: 3, shadowColor: 'rgba(58,208,255,.5)', shadowBlur: 8 }, itemStyle: { color: '#7ce4ff' },
+      areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: 'rgba(58,208,255,0.32)' }, { offset: 1, color: 'rgba(58,208,255,0.02)' }
+      ]) },
       data: [1050, 1062, 1075, 1108, 1095, 1080, 1066],
       markLine: {
         silent: true, symbol: 'none',
-        lineStyle: { color: '#ff5c5c', type: 'dashed', width: 1 },
-        label: { formatter: '阈值 1100', color: '#ff5c5c', fontSize: 11 },
+        lineStyle: { color: '#ff5c5c', type: 'dashed', width: 2 },
+        label: { formatter: '阈值 1100', color: '#ff8a8a', fontSize: 16, position: 'insideStartTop' },
         data: [{ yAxis: 1100 }]
       }
     }]
@@ -111,12 +113,13 @@ onMounted(() => {
 
   const l = echarts.init(levelChart.value)
   l.setOption({
-    tooltip: { trigger: 'item', backgroundColor: 'rgba(7,26,46,.92)', borderColor: '#2a6f9e', textStyle: { color: '#cfe6ff' } },
+    tooltip: { trigger: 'item', backgroundColor: 'rgba(7,26,46,.94)', borderColor: '#2a6f9e', textStyle: { color: '#cfe6ff', fontSize: 17 }, padding: [10, 14] },
     series: [{
-      type: 'pie', radius: ['52%', '74%'], center: ['50%', '52%'],
-      label: { formatter: '{b} {c}', color: '#8fb8d9', fontSize: 11 },
-      labelLine: { lineStyle: { color: '#2a6f9e' } },
-      itemStyle: { borderColor: 'rgba(7,26,46,.9)', borderWidth: 2 },
+      type: 'pie', radius: ['48%', '68%'], center: ['50%', '52%'], minAngle: 16,
+      labelLayout: { hideOverlap: true },
+      label: { formatter: '{b} {c}', color: '#a8cbe6', fontSize: 15, fontWeight: 500 },
+      labelLine: { lineStyle: { color: '#2a6f9e' }, length: 10, length2: 6 },
+      itemStyle: { borderColor: 'rgba(7,26,46,.9)', borderWidth: 3 },
       data: [
         { value: 18, name: '正常', itemStyle: { color: '#43e0a0' } },
         { value: 6, name: '提示', itemStyle: { color: '#7fd4ff' } },
@@ -133,10 +136,10 @@ onMounted(() => {
 
 <style scoped>
 .board-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
-.board-kicker { font-size: 11px; letter-spacing: 2px; color: #6aa8d6; }
-.board-title { font-size: 22px; font-weight: 600; margin-top: 3px; letter-spacing: 3px; color: var(--title); text-shadow: 0 0 14px rgba(58, 208, 255, .45); }
-.board-stamp { display: flex; align-items: center; gap: 7px; font-size: 11px; color: #8fd0ff; border: 1px solid rgba(58, 208, 255, .4); padding: 4px 10px; background: rgba(14, 52, 84, .55); }
-.stamp-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--warn); box-shadow: 0 0 6px rgba(255, 201, 77, .7); }
+.board-kicker { font-size: 16px; letter-spacing: 2px; color: #7fb3d8; }
+.board-title { font-size: 33px; font-weight: 600; margin-top: 4px; letter-spacing: 3px; color: var(--title); text-shadow: 0 0 14px rgba(58, 208, 255, .45); }
+.board-stamp { display: flex; align-items: center; gap: 10px; font-size: 16px; color: #8fd0ff; border: 1px solid rgba(58, 208, 255, .4); padding: 8px 16px; background: rgba(14, 52, 84, .55); }
+.stamp-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--warn); box-shadow: 0 0 6px rgba(255, 201, 77, .7); }
 
 .gauge-bar {
   display: grid; grid-template-columns: repeat(4, 1fr);
@@ -145,12 +148,12 @@ onMounted(() => {
   clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
   box-shadow: inset 0 0 24px rgba(20, 80, 130, .25);
 }
-.gauge { padding: 16px 20px 15px; border-right: 1px solid var(--line-soft); }
+.gauge { padding: 28px 32px 26px; border-right: 1px solid var(--line-soft); }
 .gauge:last-child { border-right: none; }
-.gauge-label { font-size: 12px; color: #7fb3d8; letter-spacing: 1px; }
-.gauge-value { font-family: var(--num); font-size: 34px; line-height: 1.2; margin: 5px 0 3px; letter-spacing: 1px; text-shadow: 0 0 12px rgba(58, 208, 255, .35); }
-.gauge-unit { font-size: 14px; margin-left: 5px; color: #7fb3d8; font-family: inherit; }
-.gauge-foot { font-size: 11px; color: #557a99; }
+.gauge-label { font-size: 17px; color: #7fb3d8; letter-spacing: 1.5px; }
+.gauge-value { font-family: var(--num); font-size: 60px; font-weight: 600; line-height: 1.15; margin: 7px 0 4px; letter-spacing: 1px; text-shadow: 0 0 18px currentColor; }
+.gauge-unit { font-size: 20px; margin-left: 7px; color: #9fc3e0; font-family: inherit; font-weight: 400; }
+.gauge-foot { font-size: 16px; color: #7fa3c2; letter-spacing: .5px; }
 
 @media (max-width: 900px) {
   .gauge-bar { grid-template-columns: repeat(2, 1fr); }

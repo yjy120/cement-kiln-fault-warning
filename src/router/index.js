@@ -4,6 +4,7 @@ import WarningScreen from '../views/WarningScreen.vue'
 import AnomalyDetection from '../views/AnomalyDetection.vue'
 import WarningList from '../views/WarningList.vue'
 import DisposalRecords from '../views/DisposalRecords.vue'
+import AiAssistantPage from '../views/AiAssistantPage.vue'
 
 const routes = [
   {
@@ -35,6 +36,12 @@ const routes = [
     name: 'DisposalRecords',
     component: DisposalRecords,
     meta: { title: '处置记录' }
+  },
+  {
+    path: '/assistant',
+    name: 'AiAssistantPage',
+    component: AiAssistantPage,
+    meta: { title: '智能助手' }
   }
 ]
 

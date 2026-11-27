@@ -1,4 +1,4 @@
-/* 老师风格 · 水泥煅烧监测诊断系统 公共样式 */
+/* 水泥煅烧监测诊断系统 · 公共样式 */
 .sc-screen {
   position: relative; height: 100vh; min-height: 100vh; overflow: hidden; color: #cfe6ff;
   background: radial-gradient(ellipse at 50% 0%, #123a5e 0%, #0a2340 45%, #05121f 100%);
