@@ -14,7 +14,7 @@
         <div>
           <div class="ai-hero-kicker">INTELLIGENT ASSISTANT · 智能问答</div>
           <h1 class="ai-hero-title">窑线智能助手</h1>
-          <p class="ai-hero-desc">基于本系统功能与预警规则，回答关于工况、预警、异常检测与处置流程的问题</p>
+          <p class="ai-hero-desc">沉淀窑线工艺经验，贯通数据、预警与处置，回答关于工况、异常检测、预警规则与运行决策的问题</p>
         </div>
       </div>
       <div class="ai-hero-meta">
@@ -165,7 +165,7 @@ function bubbleHtml(m) {
 }
 
 const capabilities = [
-  { icon: '◎', label: '系统功能', desc: '五大模块与页面字段', questions: ['这个系统能做什么？', '预警列表有哪些字段？', '处置记录怎么登记？'] },
+  { icon: '◎', label: '系统功能', desc: '五大模块与页面字段', questions: ['这个系统能做什么？', '数据到处置是怎么闭环的？', '处置记录怎么登记？'] },
   { icon: '◆', label: '预警规则', desc: '等级划分与状态流转', questions: ['预警等级怎么划分？', '预警状态有哪些？', '待确认到已关闭的流程'] },
   { icon: '⌁', label: '异常检测', desc: '统计量与关键变量', questions: ['异常检测用的什么方法？', 'T² 和 eT² 是什么意思？', '有哪些关键变量？'] },
   { icon: '◇', label: '工况判断', desc: '变量异常的一般含义', questions: ['窑尾温度高说明什么？', '篦下压力波动怎么看？', 'f-CaO 参考范围是多少？'] }

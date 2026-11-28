@@ -4,6 +4,7 @@
       <div class="sc-run">
         <router-link to="/" class="sc-back-inline">‹ 返回总览</router-link>
         <span>运行情况：<b>生产</b></span>
+        <span class="sc-data-source">数据底座：<b>24 测点在线</b> · 统一时基</span>
       </div>
       <div class="head-title-wrap">
         <div class="sc-title">{{ current.title }}</div>

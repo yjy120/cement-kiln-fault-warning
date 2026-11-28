@@ -4,8 +4,8 @@
       <div class="brand">
         <span class="brand-mark">窑</span>
         <div>
-          <div class="brand-title">水泥窑线预警平台</div>
-          <div class="brand-sub">Cement Kiln Warning</div>
+          <div class="brand-title">水泥窑线智能管控平台</div>
+          <div class="brand-sub">数据 · 模型 · 决策一体化</div>
         </div>
       </div>
       <nav class="nav">
@@ -29,7 +29,7 @@
           <span class="nav-ai-tag">AI</span>
         </router-link>
       </nav>
-      <div class="sidebar-foot">水泥窑线智能监控平台</div>
+      <div class="sidebar-foot">异常检测 · 分级预警 · 处置闭环</div>
     </aside>
     <main class="main">
       <header class="topbar" v-if="!isScreen">

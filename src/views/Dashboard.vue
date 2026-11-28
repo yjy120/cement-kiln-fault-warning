@@ -32,6 +32,64 @@
       </div>
     </div>
 
+    <!-- 平台能力：数据底座 / 设备健康 / 能耗双碳 -->
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="cap-head">
+          <span class="cap-icon">▦</span>
+          <div>
+            <div class="cap-name">统一数据底座</div>
+            <div class="cap-en">DATA FOUNDATION</div>
+          </div>
+          <span class="cap-flag">示例数据</span>
+        </div>
+        <div class="cap-desc">多源异构数据统一汇聚，为预警与分析提供同源数据支撑</div>
+        <div class="cap-stats">
+          <div class="cap-stat"><b>24</b><span>接入测点</span></div>
+          <div class="cap-stat"><b>3</b><span>数据源类型</span></div>
+          <div class="cap-stat"><b>1s</b><span>采集周期</span></div>
+        </div>
+        <div class="cap-src">数据源：DCS 实时 / 质量化验 / 生产报表</div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-head">
+          <span class="cap-icon">◎</span>
+          <div>
+            <div class="cap-name">设备健康状态</div>
+            <div class="cap-en">EQUIPMENT HEALTH</div>
+          </div>
+          <span class="cap-flag">示例数据</span>
+        </div>
+        <div class="cap-desc">关键设备健康度跟踪，辅助运维排查与预防性维护</div>
+        <div class="health-list">
+          <div class="health-row" v-for="h in health" :key="h.name">
+            <span class="health-name">{{ h.name }}</span>
+            <span class="health-track"><i :style="{ width: h.value + '%', background: h.color }"></i></span>
+            <span class="health-val" :style="{ color: h.color }">{{ h.value }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-head">
+          <span class="cap-icon">◈</span>
+          <div>
+            <div class="cap-name">能耗与双碳指标</div>
+            <div class="cap-en">ENERGY &amp; CARBON</div>
+          </div>
+          <span class="cap-flag">示例数据</span>
+        </div>
+        <div class="cap-desc">吨熟料能耗跟踪，对照工艺参考值辅助节能降耗</div>
+        <div class="energy-list">
+          <div class="energy-row" v-for="e in energy" :key="e.name">
+            <div class="energy-info"><span class="energy-name">{{ e.name }}</span><span class="energy-ref">参考 {{ e.ref }}</span></div>
+            <div class="energy-num">{{ e.value }}<span>{{ e.unit }}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 最新预警 -->
     <div class="panel">
       <div class="panel-title">最新预警<span class="sub">示例数据</span></div>
@@ -68,6 +126,18 @@ const warnings = [
   { id: 1, time: '08:32:10', point: '窑尾温度', desc: '持续偏高，超出正常波动范围', level: '严重预警', status: '待确认' },
   { id: 2, time: '08:15:46', point: '篦冷机压力', desc: '短时波动异常', level: '一般预警', status: '已确认' },
   { id: 3, time: '07:58:23', point: '窑头负压', desc: '接近预警阈值', level: '提示', status: '已关闭' }
+]
+
+// 平台能力看板数据（示例值；能耗参考值取自系统已固化的工艺参考区间）
+const health = [
+  { name: '预热器 C1-C5', value: 92, color: '#43e0a0' },
+  { name: '分解炉', value: 88, color: '#43e0a0' },
+  { name: '回转窑', value: 76, color: '#ffc94d' },
+  { name: '篦冷机', value: 95, color: '#43e0a0' }
+]
+const energy = [
+  { name: '吨熟料煤耗', value: '98.6', unit: 'kgce/t', ref: '≤100 kgce/t' },
+  { name: '吨熟料电耗', value: '25.4', unit: 'kWh/t', ref: '≤26 kWh/t' }
 ]
 
 const levelColors = { '正常': '#43e0a0', '提示': '#7fd4ff', '一般预警': '#ffc94d', '严重预警': '#ff8a4d', '紧急报警': '#ff5c5c' }
@@ -155,7 +225,47 @@ onMounted(() => {
 .gauge-unit { font-size: 20px; margin-left: 7px; color: #9fc3e0; font-family: inherit; font-weight: 400; }
 .gauge-foot { font-size: 16px; color: #7fa3c2; letter-spacing: .5px; }
 
+/* 平台能力看板 */
+.cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.cap-card {
+  background: linear-gradient(160deg, var(--panel-a), var(--panel-b));
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--accent);
+  padding: 22px 24px 20px;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  box-shadow: inset 0 0 24px rgba(20, 80, 130, .25);
+}
+.cap-head { display: flex; align-items: center; gap: 11px; }
+.cap-icon {
+  width: 38px; height: 38px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: var(--accent);
+  border: 1px solid rgba(58, 208, 255, .4); background: rgba(58, 208, 255, .08);
+}
+.cap-name { font-size: 18px; color: var(--title); font-weight: 600; }
+.cap-en { font-size: 12px; color: #5f93bc; letter-spacing: 1.5px; margin-top: 1px; }
+.cap-flag { margin-left: auto; font-size: 12px; color: #7fa3c2; border: 1px solid var(--line-soft); padding: 2px 8px; white-space: nowrap; }
+.cap-desc { font-size: 14px; color: #8fb8d9; margin: 14px 0 16px; line-height: 1.6; }
+.cap-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.cap-stat { text-align: center; padding: 8px 4px; background: rgba(58, 208, 255, .05); border: 1px solid var(--line-soft); }
+.cap-stat b { display: block; font-family: var(--num); font-size: 26px; color: var(--accent-bright); line-height: 1.2; }
+.cap-stat span { font-size: 13px; color: #7fa3c2; }
+.cap-src { font-size: 12.5px; color: #5f93bc; margin-top: 14px; border-top: 1px solid var(--line-soft); padding-top: 10px; }
+.health-list, .energy-list { display: flex; flex-direction: column; gap: 11px; }
+.health-row { display: flex; align-items: center; gap: 10px; }
+.health-name { width: 104px; flex-shrink: 0; font-size: 14px; color: #b4d4ec; }
+.health-track { flex: 1; height: 8px; background: rgba(58, 208, 255, .1); overflow: hidden; }
+.health-track i { display: block; height: 100%; box-shadow: 0 0 8px currentColor; }
+.health-val { width: 44px; text-align: right; font-family: var(--num); font-size: 15px; }
+.energy-row { padding: 9px 12px; background: rgba(58, 208, 255, .05); border: 1px solid var(--line-soft); }
+.energy-info { display: flex; justify-content: space-between; align-items: baseline; }
+.energy-name { font-size: 14px; color: #b4d4ec; }
+.energy-ref { font-size: 12.5px; color: #7fa3c2; }
+.energy-num { font-family: var(--num); font-size: 26px; color: var(--accent-bright); line-height: 1.3; }
+.energy-num span { font-family: inherit; font-size: 13px; color: #7fa3c2; margin-left: 5px; }
+
 @media (max-width: 900px) {
+  .cap-grid { grid-template-columns: 1fr; }
   .gauge-bar { grid-template-columns: repeat(2, 1fr); }
   .gauge:nth-child(2) { border-right: none; }
   .gauge:nth-child(-n+2) { border-bottom: 1px solid var(--line-soft); }
